@@ -1,2 +1,10 @@
 @GymManagement.Api_HostAddress = http://localhost:5268
+@adminId = ..
+POST {{GymManagement.Api_HostAddress}}/subscriptions
+Content-Type: application/json
+
+{
+  "adminId": {{adminId}},
+  "subscriptionType": "Free"
+}
 
