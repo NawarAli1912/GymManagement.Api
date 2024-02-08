@@ -1,27 +1,30 @@
 ﻿using GymManagement.Application.Common.Interfaces;
+using GymManagement.Domain.Admins;
+using GymManagement.Domain.Gyms;
 using GymManagement.Domain.Subscriptions;
 using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 
 namespace GymManagement.Infrastructure.Common.Persistence;
-public sealed class GymManagementDbContext : DbContext, IUnitOfWork
+public class GymManagementDbContext : DbContext, IUnitOfWork
 {
+    public DbSet<Admin> Admins { get; set; } = default!;
     public DbSet<Subscription> Subscriptions { get; set; } = default!;
+    public DbSet<Gym> Gyms { get; set; } = default!;
 
-    public GymManagementDbContext(DbContextOptions<GymManagementDbContext> options) : base(options)
+    public GymManagementDbContext(DbContextOptions options) : base(options)
     {
-
     }
 
-    public async Task CommitChanges()
+    public async Task CommitChangesAsync()
     {
-        await base.SaveChangesAsync();
+        await SaveChangesAsync();
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
-        base.OnModelCreating(modelBuilder);
 
+        base.OnModelCreating(modelBuilder);
     }
 }

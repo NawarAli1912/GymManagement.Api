@@ -22,8 +22,8 @@ public sealed class CreateSubscriptionCommandHandler : IRequestHandler<CreateSub
             request.SubscriptionType,
             request.AdminId);
 
-        await _subscriptionsRepository.Add(subscription);
-        await _unitOfWork.CommitChanges();
+        await _subscriptionsRepository.AddSubscriptionAsync(subscription);
+        await _unitOfWork.CommitChangesAsync();
 
         return subscription;
     }

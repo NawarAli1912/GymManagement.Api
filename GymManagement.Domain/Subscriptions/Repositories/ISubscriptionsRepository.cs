@@ -3,6 +3,11 @@ namespace GymManagement.Domain.Subscriptions.Repositories;
 
 public interface ISubscriptionsRepository
 {
-    Task Add(Subscription subscription);
-    Task<Subscription?> GetById(Guid id);
+    Task AddSubscriptionAsync(Subscription subscription);
+    Task<bool> ExistsAsync(Guid id);
+    Task<Subscription?> GetByAdminIdAsync(Guid adminId);
+    Task<Subscription?> GetByIdAsync(Guid id);
+    Task<List<Subscription>> ListAsync();
+    Task RemoveSubscriptionAsync(Subscription subscription);
+    Task UpdateAsync(Subscription subscription);
 }
